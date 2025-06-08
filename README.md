@@ -109,6 +109,7 @@ SEQUENCER_COINBASE=0xYourPublicWalletAddress
 
 ### 5 : 启动节点
 
+打开一个新窗口放在后台
 ```bash
 screen -S Aztec
 ```
@@ -127,6 +128,9 @@ aztec start --node --archiver --sequencer \
   --p2p.p2pIp "$P2P_IP" \
   --p2p.maxTxPoolSize 1000000000 \
   --sequencer.governanceProposerPayload 0x54F7fe24E349993b363A5Fa1bccdAe2589D5E5Ef
+```
+<img width="907" alt="Screenshot 2025-06-08 at 15 44 37" src="https://github.com/user-attachments/assets/081d0845-0862-46f4-abc0-e68d88f986ef" />
+显示区块号就说明成功了
 ```
 
 
