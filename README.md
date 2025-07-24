@@ -131,6 +131,10 @@ aztec start --node --archiver --sequencer \
 ```
 <img width="907" alt="Screenshot 2025-06-08 at 15 44 37" src="https://github.com/user-attachments/assets/081d0845-0862-46f4-abc0-e68d88f986ef" />
 显示区块号就说明成功了
+
+如果要更新节点：
+```bash
+aztec-up latest
 ```
 
 
