@@ -123,7 +123,7 @@ aztec start --node --archiver --sequencer \
   --network alpha-testnet \
   --l1-rpc-urls "$ETHEREUM_HOSTS" \
   --l1-consensus-host-urls "$L1_CONSENSUS_HOST_URLS" \
-  --sequencer.validatorPrivateKey "$SEQUENCER_VALIDATOR_PRIVATE_KEY" \
+  --sequencer.validatorPrivateKeys "$SEQUENCER_VALIDATOR_PRIVATE_KEY" \
   --sequencer.coinbase "$SEQUENCER_COINBASE" \
   --p2p.p2pIp "$P2P_IP" \
   --p2p.maxTxPoolSize 1000000000 \
