@@ -105,6 +105,8 @@ ufw allow 8080
 nano ~/.aztec-sequencer.env
 ```
 将ETHEREUM_HOSTS=之后替换成你的sepolia RPC ip地址，端口号保持8545
+SEQUENCER_VALIDATOR_PRIVATE_KEY 是你要用的钱包的私钥
+SEQUENCER_COINBASE 是钱包的地址
 
 
 这里有一个技巧，如果你获得了多个RPC,可以把他们都加上互为备份，这样一个不行会自动切换为另一个，还可以使用多个平台的免费额度
