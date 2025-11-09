@@ -51,9 +51,6 @@ echo 'export PATH="$HOME/.aztec/bin:$PATH"' >> ~/.bashrc && source ~/.bashrc
 ```bash
 aztec --version
 ```
-```bash
-aztec-up alpha-testnet
-```
 
 应该会输出类似于 0.8.5 
 
