@@ -82,8 +82,8 @@ ufw allow 8080
 ```bash
 nano ~/.aztec-sequencer.env
 ```
-将ETHEREUM_HOSTS=之后替换成你的sepolia RPC
-将L1_CONSENSUS_HOST_URLS=之后替换成你的 sepolia Beacon RPC
+将ETHEREUM_HOSTS=之后替换成你的sepolia RPC ip地址，端口号保持8545
+
 
 这里有一个技巧，如果你获得了多个RPC,可以把他们都加上互为备份，这样一个不行会自动切换为另一个，还可以使用多个平台的免费额度
 就是把“ETHEREUM_HOSTS=rpc.ankr.com/eth_sepolia” 替换成“export ETHEREUM_HOSTS=rpc_1,rpc_2,rpc_3,rpc_4,rpc_5”
@@ -91,10 +91,10 @@ nano ~/.aztec-sequencer.env
 
 ```bash
 # Your Infura Execution RPC (sepolia)
-ETHEREUM_HOSTS=rpc.ankr.com/eth_sepolia
+ETHEREUM_HOSTS=http://111.111.111.111:8545 
 
 # Reliable Public Beacon Chain (Consensus) Endpoint
-L1_CONSENSUS_HOST_URLS=lodestar-sepolia.chainsafe.io
+L1_CONSENSUS_HOST_URLS=https://lodestar-sepolia.chainsafe.io/
 
 # Replace with your values
 P2P_IP=your.public.ip.address
