@@ -3,23 +3,45 @@
 
 Linux OS
 ```bash
-sudo apt update -y && sudo apt upgrade -y
-for pkg in docker.io docker-doc docker-compose podman-docker containerd runc; do sudo apt-get remove $pkg; done
+#!/usr/bin/env bash
+set -e
 
-sudo apt-get update
-sudo apt-get install ca-certificates curl gnupg
+# 1) 基础更新
+sudo apt update -y && sudo apt upgrade -y
+
+# 2) 移除可能的旧组件（不存在也不报错）
+for pkg in docker.io docker-doc docker-compose podman-docker containerd runc; do
+  sudo apt-get remove -y "$pkg" || true
+done
+
+# 3) 依赖与 GPG key
+sudo apt-get update -y
+sudo apt-get install -y ca-certificates curl gnupg
+
 sudo install -m 0755 -d /etc/apt/keyrings
-curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg \
+  | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
 sudo chmod a+r /etc/apt/keyrings/docker.gpg
 
-echo \
-  "deb [arch="$(dpkg --print-architecture)" signed-by=/etc/apt/keyrings/docker.gpg] download.docker.com/linux/ubuntu \
-  "$(. /etc/os-release && echo "$VERSION_CODENAME")" stable" | \
-  sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+# 4) 正确添加 Docker 官方源（注意 https://、arch、codename）
+source /etc/os-release
+echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu ${VERSION_CODENAME} stable" \
+  | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
 
-sudo apt update -y && sudo apt upgrade -y
+# 5) 安装 Docker Engine + Buildx + Compose
+sudo apt update -y
+sudo apt install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
 
-sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+# 6) 启动并开机自启（一般默认已启用，这里再确保一下）
+sudo systemctl enable --now docker
+
+# 7) 验证
+docker --version
+sudo docker run --rm hello-world
+
+# 8) （可选）把当前用户加入 docker 组，免 sudo
+# 注意：执行后需要重新登录会话才生效
+# sudo usermod -aG docker $USER
 ```
 - 测试 Docker
 ```bash
